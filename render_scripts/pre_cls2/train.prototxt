@@ -5,23 +5,22 @@ layer {
   top: "data"
   top: "label"
   include {
-    phase: TEST
+    phase: TRAIN
   }
   transform_param {
     mirror: false
-    crop_size: 227
+    crop_size: 128
     mean_value: 1
   }
   image_data_param {
     root_folder: "/scratch/xiaolonw/sunrgbd/data/"
-    source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/testlist2.txt"
+    source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/trainlist2.txt"
     batch_size: 100
-    new_height: 227
-    new_width: 227
-    shuffle: false
+    new_height: 128
+    new_width: 128
+    shuffle: true
   }
 }
-
 
 
 layer {
@@ -33,7 +32,6 @@ layer {
     bias_filler { type: "constant" value: 0 } 
   }
 }
-
 
 layer {
   name: "bn1"
@@ -212,11 +210,8 @@ layer {
 }
 
 
-
-
-layer { name: "cls_prob" type: "Softmax" bottom: "cls_score" top: "cls_prob" }
-
-
-
-
+layer { 
+  name: "loss_cls" type: "SoftmaxWithLoss" bottom: "cls_score"
+  bottom: "label" top: "loss_cls"
+}
 
