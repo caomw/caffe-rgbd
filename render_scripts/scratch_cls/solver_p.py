@@ -16,7 +16,6 @@ caffe.set_device(2)
 solver = caffe.SGDSolver('solver.prototxt')
 # solver.net.copy_from('/scratch/16824/models/bvlc_reference_caffenet.caffemodel')
 
-train_loss = np.zeros(niter)
 
 solver.step(100000)
 
