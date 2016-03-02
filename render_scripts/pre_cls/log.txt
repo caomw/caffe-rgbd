@@ -1908,3 +1908,9 @@ I0302 01:30:47.332833  9663 sgd_solver.cpp:106] Iteration 8400, lr = 0.01
 I0302 01:31:16.292917  9663 solver.cpp:237] Iteration 8420, loss = 2.85917e-05
 I0302 01:31:16.292948  9663 solver.cpp:253]     Train net output #0: loss_cls = 2.86425e-05 (* 1 = 2.86425e-05 loss)
 I0302 01:31:16.292956  9663 sgd_solver.cpp:106] Iteration 8420, lr = 0.01
+I0302 01:31:45.151093  9663 solver.cpp:237] Iteration 8440, loss = 0.000140537
+I0302 01:31:45.151124  9663 solver.cpp:253]     Train net output #0: loss_cls = 0.000140587 (* 1 = 0.000140587 loss)
+I0302 01:31:45.151134  9663 sgd_solver.cpp:106] Iteration 8440, lr = 0.01
+I0302 01:32:14.062382  9663 solver.cpp:237] Iteration 8460, loss = 5.59847e-05
+I0302 01:32:14.062413  9663 solver.cpp:253]     Train net output #0: loss_cls = 5.60355e-05 (* 1 = 5.60355e-05 loss)
+I0302 01:32:14.062423  9663 sgd_solver.cpp:106] Iteration 8460, lr = 0.01

@@ -589,3 +589,9 @@ I0302 01:30:46.180058 23669 sgd_solver.cpp:106] Iteration 1100, lr = 0.01
 I0302 01:31:15.411787 23669 solver.cpp:237] Iteration 1120, loss = 0.0682594
 I0302 01:31:15.411816 23669 solver.cpp:253]     Train net output #0: loss_cls = 0.0682594 (* 1 = 0.0682594 loss)
 I0302 01:31:15.411825 23669 sgd_solver.cpp:106] Iteration 1120, lr = 0.01
+I0302 01:31:44.400238 23669 solver.cpp:237] Iteration 1140, loss = 0.0840413
+I0302 01:31:44.400269 23669 solver.cpp:253]     Train net output #0: loss_cls = 0.0840413 (* 1 = 0.0840413 loss)
+I0302 01:31:44.400276 23669 sgd_solver.cpp:106] Iteration 1140, lr = 0.01
+I0302 01:32:13.234493 23669 solver.cpp:237] Iteration 1160, loss = 0.0889549
+I0302 01:32:13.234524 23669 solver.cpp:253]     Train net output #0: loss_cls = 0.0889549 (* 1 = 0.0889549 loss)
+I0302 01:32:13.234534 23669 sgd_solver.cpp:106] Iteration 1160, lr = 0.01

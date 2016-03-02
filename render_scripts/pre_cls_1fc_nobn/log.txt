@@ -640,3 +640,9 @@ I0302 01:30:44.006845 21651 sgd_solver.cpp:106] Iteration 1440, lr = 0.01
 I0302 01:31:13.164089 21651 solver.cpp:237] Iteration 1460, loss = 0.404677
 I0302 01:31:13.164124 21651 solver.cpp:253]     Train net output #0: loss_cls = 0.404677 (* 1 = 0.404677 loss)
 I0302 01:31:13.164132 21651 sgd_solver.cpp:106] Iteration 1460, lr = 0.01
+I0302 01:31:41.921066 21651 solver.cpp:237] Iteration 1480, loss = 0.729643
+I0302 01:31:41.921097 21651 solver.cpp:253]     Train net output #0: loss_cls = 0.729643 (* 1 = 0.729643 loss)
+I0302 01:31:41.921105 21651 sgd_solver.cpp:106] Iteration 1480, lr = 0.01
+I0302 01:32:11.051867 21651 solver.cpp:237] Iteration 1500, loss = 0.682117
+I0302 01:32:11.051903 21651 solver.cpp:253]     Train net output #0: loss_cls = 0.682117 (* 1 = 0.682117 loss)
+I0302 01:32:11.051911 21651 sgd_solver.cpp:106] Iteration 1500, lr = 0.01
