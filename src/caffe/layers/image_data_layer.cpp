@@ -126,6 +126,7 @@ void ImageDataLayer<Dtype>::load_batch(Batch<Dtype>* batch) {
   this->transformed_data_.Reshape(top_shape);
   // Reshape batch according to the batch_size.
   top_shape[0] = batch_size;
+  top_shape[1] = 6;
   batch->data_.Reshape(top_shape);
 
   Dtype* prefetch_data = batch->data_.mutable_cpu_data();
