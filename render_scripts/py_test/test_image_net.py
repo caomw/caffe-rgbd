@@ -7,15 +7,14 @@ sys.path.insert(0, caffe_root + 'python')
 
 import caffe
 
-test_listfile = '/home/xiaolonw/assignment/data/list1/testlist_class.txt'
+test_listfile = '/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/testlist2.txt'
 result_file = 'cls_results.txt'
-pair_size = 25
 
 caffe.set_device(0)
 caffe.set_mode_gpu()
                 #'/scratch/16824/test/exp_cls/model__iter_50000.caffemodel',
-net = caffe.Net('/home/xiaolonw/cnncode/caffe-coco/coco_scripts/exp_cls/test.prototxt',
-                '/scratch/16824/test/exp_cls_scratch/model__iter_50000.caffemodel',
+net = caffe.Net('/nfs/hn46/xiaolonw/render_cnncode/caffe-rgbd/render_scripts/pre_cls/test.prototxt',
+                '/nfs.yoda/xiaolonw/fast_rcnn/models_sunrgbd/pre_cls/model__iter_5000.caffemodel',
                 caffe.TEST)
 
 test_list = np.loadtxt(test_listfile,  str, comments=None, delimiter='\n')
@@ -35,10 +34,10 @@ for i in range(batch_count):
 		if id >= data_counts:
 			break
 
-		lbl = int(test_list[id].split(' ')[1])
+		lbl = int(test_list[id].split(' ')[2])
 		fname = test_list[id].split(' ')[0]
 		
-		prop = out['softmax'][j] 
+		prop = out['cls_prob'][j] 
 		pred_lbl = prop.argmax()
 		if pred_lbl == lbl:
 			accuracy = accuracy + 1
