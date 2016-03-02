@@ -1,0 +1,119 @@
+name: "sungrbd"
+layer {
+  name: "data"
+  type: "ImageData"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: false
+    crop_size: 128
+    mean_value: 1
+  }
+  image_data_param {
+    root_folder: "/scratch/xiaolonw/sunrgbd/data/"
+    source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/trainlist2.txt"
+    batch_size: 100
+    new_height: 128
+    new_width: 128
+    shuffle: true
+  }
+}
+
+
+layer {
+  name: "da_conv1" type: "Convolution" bottom: "data" top: "da_conv1"
+  param { lr_mult: 0 decay_mult: 0 }
+  param { lr_mult: 0 decay_mult: 0 }
+  convolution_param { num_output: 64 kernel_size: 5 pad: 2 stride: 2
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 0 } 
+  }
+}
+layer {
+  name: "da_relu1" type: "ReLU" bottom: "da_conv1" top: "da_conv1" relu_param{ negative_slope: 0.2 }
+}
+
+layer {
+  name: "da_conv2" type: "Convolution" bottom: "da_conv1" top: "da_conv2"
+  param { lr_mult: 0 decay_mult: 0 }
+  param { lr_mult: 0 decay_mult: 0 }
+  convolution_param { num_output: 128 kernel_size: 5 pad: 2 stride: 2 
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 1 } 
+  }
+}
+layer { 
+  name: "da_relu2" type: "ReLU" bottom: "da_conv2" top: "da_conv2" relu_param { negative_slope: 0.2 }
+}
+
+layer {
+  name: "da_conv3" type: "Convolution" bottom: "da_conv2" top: "da_conv3"
+  param { lr_mult: 0 decay_mult: 0 }
+  param { lr_mult: 0 decay_mult: 0 }
+  convolution_param { num_output: 256 kernel_size: 3 pad: 1 stride: 2 
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 0 } 
+  }
+}
+layer {
+  name: "da_relu3" type: "ReLU" bottom: "da_conv3" top: "da_conv3"  relu_param { negative_slope: 0.2 }
+}
+layer {
+  name: "da_conv4" type: "Convolution" bottom: "da_conv3" top: "da_conv4"
+  param { lr_mult: 0 decay_mult: 0}
+  param { lr_mult: 0 decay_mult: 0 }
+  convolution_param { num_output: 512 kernel_size: 3 pad: 1 stride: 2
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 1 } 
+  }
+}
+layer {
+  name: "da_relu4" type: "ReLU" bottom: "da_conv4" top: "da_conv4" relu_param{ negative_slope: 0.2 }
+}
+layer {
+  name: "da_conv5" type: "Convolution" bottom: "da_conv4" top: "da_conv5"
+  param { lr_mult: 0 decay_mult: 0 }
+  param { lr_mult: 0 decay_mult: 0 }
+  convolution_param { num_output: 128 kernel_size: 3 pad: 1 stride: 1 
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 1 } 
+  }
+}
+layer {
+  name: "da_relu5" type: "ReLU" bottom: "da_conv5" top: "da_conv5" relu_param{ negative_slope: 0.2 }
+}
+
+layer {
+  name: "pool5"
+  type: "Pooling"
+  bottom: "da_conv5"
+  top: "pool5"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+
+layer {
+  name: "cls_score" type: "InnerProduct" bottom: "pool5" top:
+  "cls_score"
+  param { lr_mult: 1 decay_mult: 1 }
+  param { lr_mult: 2 decay_mult: 0 }
+  inner_product_param {
+    num_output: 19
+    weight_filler { type: "gaussian" std: 0.01 }
+    bias_filler { type: "constant" value: 0 }
+  }
+}
+
+
+layer { 
+  name: "loss_cls" type: "SoftmaxWithLoss" bottom: "cls_score"
+  bottom: "label" top: "loss_cls"
+}
+
