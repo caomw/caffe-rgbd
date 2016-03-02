@@ -13,8 +13,8 @@ result_file = 'cls_results.txt'
 caffe.set_device(0)
 caffe.set_mode_gpu()
                 #'/scratch/16824/test/exp_cls/model__iter_50000.caffemodel',
-net = caffe.Net('/nfs/hn46/xiaolonw/render_cnncode/caffe-rgbd/render_scripts/pre_cls/test.prototxt',
-                '/nfs.yoda/xiaolonw/fast_rcnn/models_sunrgbd/pre_cls/model__iter_5000.caffemodel',
+net = caffe.Net('/nfs/hn46/xiaolonw/render_cnncode/caffe-rgbd/render_scripts/scratch_cls/test.prototxt',
+                '/nfs.yoda/xiaolonw/fast_rcnn/models_sunrgbd/scratch_cls/model__iter_5000.caffemodel',
                 caffe.TEST)
 
 test_list = np.loadtxt(test_listfile,  str, comments=None, delimiter='\n')
