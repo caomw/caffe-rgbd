@@ -146,7 +146,7 @@ layer {
 
 
 layer {
-  name: "da_fc6" type: "InnerProduct" bottom: "pool5" top: "da_fc6"
+  name: "fc6" type: "InnerProduct" bottom: "pool5" top: "fc6"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   inner_product_param {
@@ -159,7 +159,7 @@ layer {
 layer {
   name: "bn6_2"
   type: "BatchNorm"
-  bottom: "da_fc6"
+  bottom: "fc6"
   top: "bn6_2"
 }
 
@@ -172,7 +172,7 @@ layer {
 }
 
 layer {
-  name: "da_fc7" type: "InnerProduct" bottom: "bn6_2" top: "da_fc7"
+  name: "fc7" type: "InnerProduct" bottom: "bn6_2" top: "fc7"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   inner_product_param {
@@ -185,7 +185,7 @@ layer {
 layer {
   name: "bn7"
   type: "BatchNorm"
-  bottom: "da_fc7"
+  bottom: "fc7"
   top: "bn7"
 }
 
@@ -198,8 +198,8 @@ layer {
 }
 
 layer {
-  name: "da_cls_score" type: "InnerProduct" bottom: "bn7" top:
-  "cls_score_1"
+  name: "cls_score" type: "InnerProduct" bottom: "bn7" top:
+  "cls_score"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   inner_product_param {
@@ -211,7 +211,7 @@ layer {
 
 
 layer { 
-  name: "da_loss_cls" type: "SoftmaxWithLoss" bottom: "cls_score_1"
-  bottom: "label" top: "da_loss_cls"
+  name: "loss_cls" type: "SoftmaxWithLoss" bottom: "cls_score"
+  bottom: "label" top: "loss_cls"
 }
 

@@ -14,7 +14,7 @@ caffe.set_device(1)
 # caffe.set_mode_cpu()
 
 solver = caffe.SGDSolver('solver.prototxt')
-# solver.net.copy_from('/scratch/16824/models/bvlc_reference_caffenet.caffemodel')
+solver.net.copy_from('/nfs.yoda/xiaolonw/fast_rcnn/models/pre_gan_joints2_bn/fast_rcnn_zero.caffemodel')
 
 
 solver.step(50000)

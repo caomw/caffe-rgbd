@@ -5,22 +5,23 @@ layer {
   top: "data"
   top: "label"
   include {
-    phase: TRAIN
+    phase: TEST
   }
   transform_param {
     mirror: false
-    crop_size: 128
+    crop_size: 227
     mean_value: 1
   }
   image_data_param {
     root_folder: "/scratch/xiaolonw/sunrgbd/data/"
-    source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/trainlist2.txt"
+    source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/testlist2.txt"
     batch_size: 100
-    new_height: 128
-    new_width: 128
-    shuffle: true
+    new_height: 227
+    new_width: 227
+    shuffle: false
   }
 }
+
 
 
 layer {
@@ -32,6 +33,7 @@ layer {
     bias_filler { type: "constant" value: 0 } 
   }
 }
+
 
 layer {
   name: "bn1"
@@ -131,7 +133,6 @@ layer {
   name: "da_relu5" type: "ReLU" bottom: "bn5" top: "bn5" relu_param{ negative_slope: 0.2 }
 }
 
-
 layer {
   name: "pool5"
   type: "Pooling"
@@ -143,6 +144,7 @@ layer {
     stride: 2
   }
 }
+
 
 
 layer {
@@ -198,20 +200,36 @@ layer {
 }
 
 layer {
-  name: "da_cls_score" type: "InnerProduct" bottom: "bn7" top:
-  "cls_score_1"
-  param { lr_mult: 1 decay_mult: 1 }
-  param { lr_mult: 2 decay_mult: 0 }
+  name: "da_cls_score"
+  type: "InnerProduct"
+  bottom: "bn7"
+  top: "cls_score_1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   inner_product_param {
     num_output: 19
-    weight_filler { type: "gaussian" std: 0.01 }
-    bias_filler { type: "constant" value: 0 }
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
   }
 }
 
 
-layer { 
-  name: "da_loss_cls" type: "SoftmaxWithLoss" bottom: "cls_score_1"
-  bottom: "label" top: "da_loss_cls"
-}
+
+layer { name: "cls_prob" type: "Softmax" bottom: "cls_score_1" top: "cls_prob" }
+
+
+
+
 
