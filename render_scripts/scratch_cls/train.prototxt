@@ -9,15 +9,15 @@ layer {
   }
   transform_param {
     mirror: false
-    crop_size: 227
+    crop_size: 128
     mean_value: 1
   }
   image_data_param {
     root_folder: "/scratch/xiaolonw/sunrgbd/data/"
     source: "/nfs/hn38/users/xiaolonw/sunrgbd/SUNRGBDtoolbox/trainlist2.txt"
     batch_size: 128
-    new_height: 227
-    new_width: 227
+    new_height: 128
+    new_width: 128
     shuffle: true
   }
 }
