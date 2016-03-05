@@ -87,17 +87,19 @@ layer {
   name: "da_relu5" type: "ReLU" bottom: "da_conv5" top: "da_conv5" relu_param{ negative_slope: 0.2 }
 }
 
-layer {
-  name: "pool5"
-  type: "Pooling"
-  bottom: "da_conv5"
-  top: "pool5"
-  pooling_param {
-    pool: MAX
-    kernel_size: 3
-    stride: 2
-  }
-}
 
+
+
+# layer {
+#   name: "pool5"
+#   type: "Pooling"
+#   bottom: "da_conv5"
+#   top: "pool5"
+#   pooling_param {
+#     pool: MAX
+#     kernel_size: 3
+#     stride: 2
+#   }
+# }
 
 
